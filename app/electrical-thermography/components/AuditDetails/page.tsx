@@ -1,3 +1,4 @@
+"use client"
 const AuditDetails = () => {
     return (
       <div className="details">

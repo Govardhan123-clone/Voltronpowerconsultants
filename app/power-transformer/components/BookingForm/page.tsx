@@ -1,10 +1,10 @@
-'use client';
+'use client'; // Ensures this is a client-side component
 
 import { useState } from 'react';
 
 interface BookingFormProps {
-  service: string; // The service being booked
-  onClose: () => void; // Callback to close the form
+  service: string;
+  onClose: () => void;
 }
 
 const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
@@ -36,7 +36,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
     <div className="booking-form">
       <h2>Book {service}</h2>
       <form onSubmit={handleSubmit}>
-        {/* Date Picker */}
         <div className="form-group">
           <label htmlFor="date">Select a Date</label>
           <input
@@ -47,8 +46,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
             required
           />
         </div>
-
-        {/* Time Slots */}
         <div className="form-group">
           <label>Select a Time</label>
           <div className="time-slots">
@@ -64,8 +61,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
             ))}
           </div>
         </div>
-
-        {/* Submit and Close Buttons */}
         <div className="actions">
           <button type="submit" className="submit-button">
             Confirm Booking
@@ -75,7 +70,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
           </button>
         </div>
       </form>
-
       <style jsx>{`
         .booking-form {
           max-width: 400px;
@@ -160,4 +154,21 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
   );
 };
 
-export default BookingForm;
+const BookingPage = () => {
+  const [isBookingFormVisible, setIsBookingFormVisible] = useState(true);
+
+  return (
+    <div className="booking-page">
+      {isBookingFormVisible ? (
+        <BookingForm
+          service="Power Transformer"
+          onClose={() => setIsBookingFormVisible(false)}
+        />
+      ) : (
+        <p>Thank you for your booking!</p>
+      )}
+    </div>
+  );
+};
+
+export default BookingPage;

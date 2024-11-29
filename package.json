@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.14",
+    "build": "^0.1.4",
+    "next": "^15.0.3",
     "qrcode": "^1.5.4",
     "qrcode.react": "^4.1.0",
     "react": "^18",
@@ -17,9 +18,9 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.17.8",
     "@types/qrcode": "^1.5.5",
-    "@types/react": "^18",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",

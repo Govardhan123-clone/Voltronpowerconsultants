@@ -1,13 +1,15 @@
+// components/BookingForm.tsx
 'use client';
 
 import { useState } from 'react';
 
 interface BookingFormProps {
   service: string; // The service being booked
+  price: string; // Price of the service
   onClose: () => void; // Callback to close the form
 }
 
-const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
+const BookingForm: React.FC<BookingFormProps> = ({ service, price, onClose }) => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const availableTimes = [
@@ -28,13 +30,14 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
       alert('Please select a date and time!');
       return;
     }
-    alert(`Booking Confirmed!\nService: ${service}\nDate: ${selectedDate}\nTime: ${selectedTime}`);
+    alert(`Booking Confirmed!\nService: ${service}\nPrice: ${price}\nDate: ${selectedDate}\nTime: ${selectedTime}`);
     onClose(); // Close the form after booking
   };
 
   return (
     <div className="booking-form">
       <h2>Book {service}</h2>
+      <p>Price: {price}</p>
       <form onSubmit={handleSubmit}>
         {/* Date Picker */}
         <div className="form-group">

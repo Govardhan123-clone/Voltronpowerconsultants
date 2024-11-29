@@ -2,14 +2,12 @@
 
 import { useState } from 'react';
 
-interface BookingFormProps {
-  service: string; // The service being booked
-  onClose: () => void; // Callback to close the form
-}
-
-const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
+// Booking Form Component
+const BookingFormPage = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [isFormVisible, setIsFormVisible] = useState(true);
+
   const availableTimes = [
     '3:00 PM',
     '3:15 PM',
@@ -22,6 +20,8 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
     '5:00 PM',
   ];
 
+  const service = 'Electrical Thermography';
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedDate || !selectedTime) {
@@ -29,8 +29,39 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
       return;
     }
     alert(`Booking Confirmed!\nService: ${service}\nDate: ${selectedDate}\nTime: ${selectedTime}`);
-    onClose(); // Close the form after booking
+    setIsFormVisible(false); // Close the form after booking
   };
+
+  const handleClose = () => {
+    setIsFormVisible(false); // Close the form
+  };
+
+  if (!isFormVisible) {
+    return (
+      <div className="confirmation-message">
+        <h2>Thank you for booking!</h2>
+        <button onClick={() => setIsFormVisible(true)}>Book Another Service</button>
+
+        <style jsx>{`
+          .confirmation-message {
+            text-align: center;
+            margin: 50px auto;
+          }
+          button {
+            padding: 10px 20px;
+            background-color: #0070f3;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          button:hover {
+            background-color: #005bb5;
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <div className="booking-form">
@@ -70,7 +101,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
           <button type="submit" className="submit-button">
             Confirm Booking
           </button>
-          <button type="button" className="close-button" onClick={onClose}>
+          <button type="button" className="close-button" onClick={handleClose}>
             Cancel
           </button>
         </div>
@@ -79,7 +110,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
       <style jsx>{`
         .booking-form {
           max-width: 400px;
-          margin: 0 auto;
+          margin: 50px auto;
           padding: 20px;
           background: #f9f9f9;
           border-radius: 8px;
@@ -160,4 +191,4 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose }) => {
   );
 };
 
-export default BookingForm;
+export default BookingFormPage;
